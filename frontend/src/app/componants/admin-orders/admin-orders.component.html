@@ -1,0 +1,307 @@
+<div class="container mt-5">
+
+  <h2 class="mb-4">All Orders</h2>
+
+
+  <!-- =========================
+       SEARCH
+  ========================== -->
+
+  <div class="card p-3 mb-4">
+
+    <h5 class="mb-3">Search Orders</h5>
+
+
+    <div class="row">
+
+      <!-- Created From -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Created From
+        </label>
+
+        <input
+          type="datetime-local"
+          class="form-control"
+          [(ngModel)]="createdFrom">
+
+      </div>
+
+
+      <!-- Created To -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Created To
+        </label>
+
+        <input
+          type="datetime-local"
+          class="form-control"
+          [(ngModel)]="createdTo">
+
+      </div>
+
+
+      <!-- Updated From -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Updated From
+        </label>
+
+        <input
+          type="datetime-local"
+          class="form-control"
+          [(ngModel)]="updatedFrom">
+
+      </div>
+
+
+      <!-- Updated To -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Updated To
+        </label>
+
+        <input
+          type="datetime-local"
+          class="form-control"
+          [(ngModel)]="updatedTo">
+
+      </div>
+
+
+      <!-- Created By -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Created By
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Created By"
+          [(ngModel)]="createdBy">
+
+      </div>
+
+
+      <!-- Updated By -->
+      <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+          Updated By
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Updated By"
+          [(ngModel)]="updatedBy">
+
+      </div>
+
+    </div>
+
+
+    <!-- Buttons -->
+
+    <div class="mt-2">
+
+      <button
+        class="btn btn-primary me-2"
+        (click)="searchOrders()">
+
+        Search
+
+      </button>
+
+
+      <button
+        class="btn btn-secondary"
+        (click)="clearSearch()">
+
+        Clear
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       MESSAGES
+  ========================== -->
+
+  <div
+    *ngIf="messageEn || messageAr"
+    class="alert alert-danger">
+
+    <div *ngIf="messageEn">
+      {{ messageEn }}
+    </div>
+
+    <div *ngIf="messageAr">
+      {{ messageAr }}
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       NO ORDERS
+  ========================== -->
+
+  <div
+    *ngIf="orders.length === 0 && !messageEn"
+    class="alert alert-info">
+
+    <div>
+      No orders found
+    </div>
+
+    <div>
+      لا توجد طلبات
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ORDERS TABLE
+  ========================== -->
+
+  <div
+    *ngIf="orders.length > 0"
+    class="table-responsive">
+
+    <table class="table table-bordered table-striped">
+
+      <thead>
+
+      <tr>
+
+        <th>ID</th>
+
+        <th>Code</th>
+
+        <th>Total Price</th>
+
+        <th>Total Number</th>
+
+      </tr>
+
+      </thead>
+
+
+      <tbody>
+
+      <tr *ngFor="let order of orders">
+
+        <td>
+          {{ order.id }}
+        </td>
+
+        <td>
+          {{ order.code }}
+        </td>
+
+        <td>
+          {{ order.totalPrice }}
+        </td>
+
+        <td>
+          {{ order.totalNumber }}
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- =========================
+       PAGINATION
+  ========================== -->
+
+  <div
+    *ngIf="totalPages > 1"
+    class="d-flex justify-content-center align-items-center mt-4">
+
+
+    <button
+      class="btn btn-secondary me-2"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1">
+
+      Previous
+
+    </button>
+
+
+    <button
+      *ngFor="let page of pages"
+      class="btn me-1"
+      [class.btn-primary]="currentPage === page"
+      [class.btn-outline-primary]="currentPage !== page"
+      (click)="goToPage(page)">
+
+      {{ page }}
+
+    </button>
+
+
+    <button
+      class="btn btn-secondary ms-2"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages">
+
+      Next
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       PAGE SIZE
+  ========================== -->
+
+  <div
+    *ngIf="orders.length > 0"
+    class="mt-3 text-center">
+
+    <label class="me-2">
+      Items per page:
+    </label>
+
+
+    <select
+      [(ngModel)]="pageSize"
+      (change)="changePageSize()">
+
+      <option [ngValue]="5">
+        5
+      </option>
+
+      <option [ngValue]="10">
+        10
+      </option>
+
+      <option [ngValue]="20">
+        20
+      </option>
+
+    </select>
+
+  </div>
+
+</div>

@@ -1,0 +1,165 @@
+<div class="container mt-5">
+
+  <h2 class="mb-4">
+    Product Details
+  </h2>
+
+
+  <!-- ========================= -->
+  <!-- Add -->
+  <!-- ========================= -->
+
+  <div class="card mb-4">
+
+    <div class="card-header">
+      <h4>Add Product Details</h4>
+    </div>
+
+    <div class="card-body">
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Product ID
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="productId"
+          placeholder="Enter Product ID">
+
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="addProductDetails()">
+
+        Add Product Details
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Update -->
+  <!-- ========================= -->
+
+  <div class="card mb-4">
+
+    <div class="card-header">
+      <h4>Update Product Details</h4>
+    </div>
+
+    <div class="card-body">
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Product Details ID
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="detailsId"
+          placeholder="Enter Product Details ID">
+
+      </div>
+
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Product ID
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="productId"
+          placeholder="Enter Product ID">
+
+      </div>
+
+
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="updateProductDetails()">
+
+        Update Product Details
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Delete -->
+  <!-- ========================= -->
+
+  <div class="card mb-4">
+
+    <div class="card-header">
+      <h4>Delete Product Details</h4>
+    </div>
+
+    <div class="card-body">
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Product Details ID
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="detailsId"
+          placeholder="Enter Product Details ID">
+
+      </div>
+
+
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="deleteProductDetails()">
+
+        Delete Product Details
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Messages -->
+  <!-- ========================= -->
+
+  <div
+    class="alert alert-info"
+    *ngIf="messageEn || messageAr">
+
+    <p *ngIf="messageEn">
+      <strong>English:</strong>
+      {{ messageEn }}
+    </p>
+
+    <p *ngIf="messageAr">
+      <strong>Arabic:</strong>
+      {{ messageAr }}
+    </p>
+
+  </div>
+
+</div>

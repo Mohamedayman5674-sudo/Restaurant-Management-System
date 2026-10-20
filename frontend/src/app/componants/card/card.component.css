@@ -1,0 +1,27 @@
+.cart-link {
+  text-decoration: none;
+  padding: 0 !important;
+}
+
+.cart-info {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #fea116;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cart-price {
+  font-size: 18px;
+}
+
+.cart-number {
+  min-width: 20px;
+  text-align: center;
+}
+
+.cart-info i {
+  font-size: 18px;
+}

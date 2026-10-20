@@ -1,0 +1,262 @@
+<div class="container mt-5">
+
+  <!-- Page Title -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2 class="page-title">
+      Product Details Management
+    </h2>
+
+  </div>
+
+
+  <!-- Messages -->
+  <div
+    class="alert alert-info message-box"
+    *ngIf="messageEn || messageAr">
+
+    <p *ngIf="messageEn">
+      <strong>English:</strong>
+      {{ messageEn }}
+    </p>
+
+    <p *ngIf="messageAr">
+      <strong>Arabic:</strong>
+      {{ messageAr }}
+    </p>
+
+  </div>
+
+
+  <!-- Add / Update Form -->
+  <div class="card form-card mb-4">
+
+    <div class="card-header form-header">
+
+      <h4>
+        {{ selectedProductDetails
+        ? 'Update Product Details'
+        : 'Add Product Details' }}
+      </h4>
+
+    </div>
+
+    <div class="card-body">
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Product ID
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="productId"
+          placeholder="Enter Product ID">
+
+      </div>
+
+
+      <!-- Add -->
+      <button
+        *ngIf="!selectedProductDetails"
+        type="button"
+        class="btn btn-primary"
+        (click)="addProductDetails()">
+
+        Add Product Details
+
+      </button>
+
+
+      <!-- Update -->
+      <button
+        *ngIf="selectedProductDetails"
+        type="button"
+        class="btn btn-warning me-2"
+        (click)="updateProductDetails()">
+
+        Update Product Details
+
+      </button>
+
+
+      <!-- Cancel -->
+      <button
+        *ngIf="selectedProductDetails"
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancelEdit()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Product Details Table -->
+  <div class="product-details-table-container">
+
+    <table
+      class="table table-bordered table-hover product-details-table">
+
+      <thead>
+
+      <tr>
+
+        <th>
+          ID
+        </th>
+
+        <th>
+          Product ID
+        </th>
+
+        <th>
+          Actions
+        </th>
+
+      </tr>
+
+      </thead>
+
+      <tbody>
+
+      <tr
+        *ngFor="let details of productDetails">
+
+        <td>
+          {{ details.id }}
+        </td>
+
+        <td>
+          {{ details.productId }}
+        </td>
+
+        <td class="actions-cell">
+
+          <button
+            type="button"
+            class="action-btn edit-btn"
+            (click)="editProductDetails(details)">
+
+              <span class="action-icon">
+                ✏
+              </span>
+
+            Edit
+
+          </button>
+
+
+          <button
+            type="button"
+            class="action-btn delete-btn"
+            (click)="deleteProductDetails(details.id)">
+
+              <span class="action-icon">
+                🗑
+              </span>
+
+            Delete
+
+          </button>
+
+        </td>
+
+      </tr>
+
+
+      <!-- Empty -->
+      <tr *ngIf="productDetails.length === 0">
+
+        <td
+          colspan="3"
+          class="text-center">
+
+          No Product Details Found
+
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- Pagination -->
+  <div
+    class="pagination-container"
+    *ngIf="totalPages > 0">
+
+    <button
+      type="button"
+      class="pagination-btn"
+      [disabled]="currentPage === 1"
+      (click)="previousPage()">
+
+      Previous
+
+    </button>
+
+
+    <button
+      *ngFor="let page of pages"
+      type="button"
+      class="pagination-number"
+      [class.active-page]="page === currentPage"
+      (click)="goToPage(page)">
+
+      {{ page }}
+
+    </button>
+
+
+    <button
+      type="button"
+      class="pagination-btn"
+      [disabled]="currentPage === totalPages"
+      (click)="nextPage()">
+
+      Next
+
+    </button>
+
+  </div>
+
+
+  <!-- Page Size -->
+  <div class="page-size-container">
+
+    <label>
+      Page Size:
+    </label>
+
+    <select
+      [(ngModel)]="pageSize"
+      (change)="changePageSize()">
+
+      <option [ngValue]="5">
+        5
+      </option>
+
+      <option [ngValue]="10">
+        10
+      </option>
+
+      <option [ngValue]="20">
+        20
+      </option>
+
+    </select>
+
+  </div>
+
+</div>

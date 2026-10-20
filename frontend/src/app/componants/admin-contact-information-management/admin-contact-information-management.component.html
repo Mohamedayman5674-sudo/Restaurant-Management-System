@@ -1,0 +1,105 @@
+<div class="container mt-4">
+
+  <h2>Contact Information Management</h2>
+
+  <div
+    *ngIf="messageEn"
+    class="alert alert-success mt-3"
+  >
+    {{ messageEn }}
+    <br>
+    {{ messageAr }}
+  </div>
+
+  <div
+    *ngIf="contactInfo.length > 0"
+    class="table-responsive mt-4"
+  >
+
+    <table class="table table-bordered table-striped">
+
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr *ngFor="let contact of contactInfo">
+
+        <td>{{ contact.id }}</td>
+
+        <td>{{ contact.name }}</td>
+
+        <td>{{ contact.email }}</td>
+
+        <td>{{ contact.subject }}</td>
+
+        <td>{{ contact.message }}</td>
+
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteContactInfo(contact.id!)"
+          >
+            Delete
+          </button>
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <div
+    *ngIf="contactInfo.length === 0 && !messageEn"
+    class="alert alert-info mt-4"
+  >
+    No contact information found
+  </div>
+
+  <!-- Pagination -->
+
+  <div
+    *ngIf="totalPages > 1"
+    class="d-flex justify-content-center mt-4"
+  >
+
+    <button
+      class="btn btn-secondary me-2"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1"
+    >
+      Previous
+    </button>
+
+    <button
+      *ngFor="let page of pages"
+      class="btn btn-outline-primary me-1"
+      [class.active]="currentPage === page"
+      (click)="goToPage(page)"
+    >
+      {{ page }}
+    </button>
+
+    <button
+      class="btn btn-secondary ms-2"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages"
+    >
+      Next
+    </button>
+
+  </div>
+
+</div>

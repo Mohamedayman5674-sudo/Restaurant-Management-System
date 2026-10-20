@@ -1,0 +1,460 @@
+<div class="dashboard-container">
+
+  <!-- ========================= -->
+  <!-- HEADER -->
+  <!-- ========================= -->
+
+  <div class="dashboard-header">
+
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>Restaurant Management Overview</p>
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- ERROR MESSAGE -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="errorMessage"
+    class="error-message">
+
+    {{ errorMessage }}
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- STATISTICS -->
+  <!-- ========================= -->
+
+  <div class="statistics">
+
+    <!-- Users -->
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        👤
+      </div>
+
+      <div class="stat-content">
+
+        <span>Total Users</span>
+
+        <strong>
+          {{ dashboard.totalUsers }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- Products -->
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        🍔
+      </div>
+
+      <div class="stat-content">
+
+        <span>Total Products</span>
+
+        <strong>
+          {{ dashboard.totalProducts }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- Categories -->
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        📂
+      </div>
+
+      <div class="stat-content">
+
+        <span>Total Categories</span>
+
+        <strong>
+          {{ dashboard.totalCategories }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- Chefs -->
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        👨‍🍳
+      </div>
+
+      <div class="stat-content">
+
+        <span>Total Chefs</span>
+
+        <strong>
+          {{ dashboard.totalChefs }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- Orders -->
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        🛒
+      </div>
+
+      <div class="stat-content">
+
+        <span>Total Orders</span>
+
+        <strong>
+          {{ dashboard.totalOrders }}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- MANAGEMENT -->
+  <!-- ========================= -->
+
+  <div class="section">
+
+    <div class="section-title">
+
+      <h2>Management</h2>
+
+      <p>
+        Manage your restaurant system
+      </p>
+
+    </div>
+
+
+    <div class="management-grid">
+
+      <!-- Categories -->
+
+      <div
+        class="management-card"
+        routerLink="/admin/categories">
+
+        <div class="management-icon">
+          📂
+        </div>
+
+        <h3>
+          Category Management
+        </h3>
+
+        <p>
+          إدارة التصنيفات
+        </p>
+
+      </div>
+
+
+      <!-- Products -->
+
+      <div
+        class="management-card"
+        routerLink="/admin/products">
+
+        <div class="management-icon">
+          🍔
+        </div>
+
+        <h3>
+          Product Management
+        </h3>
+
+        <p>
+          إدارة المنتجات
+        </p>
+
+      </div>
+
+
+      <!-- Chefs -->
+
+      <div
+        class="management-card"
+        routerLink="/admin/chefs">
+
+        <div class="management-icon">
+          👨‍🍳
+        </div>
+
+        <h3>
+          Chef Management
+        </h3>
+
+        <p>
+          إدارة الشيفات
+        </p>
+
+      </div>
+
+
+      <!-- Users -->
+
+      <div
+        class="management-card"
+        routerLink="/admin/users">
+
+        <div class="management-icon">
+          👤
+        </div>
+
+        <h3>
+          User Management
+        </h3>
+
+        <p>
+          إدارة المستخدمين
+        </p>
+
+      </div>
+
+
+      <!-- Orders -->
+
+      <div
+        class="management-card"
+        routerLink="/admin/orders">
+
+        <div class="management-icon">
+          🛒
+        </div>
+
+        <h3>
+          Order Management
+        </h3>
+
+        <p>
+          إدارة الطلبات
+        </p>
+
+      </div>
+
+
+      <!-- Product Details -->
+
+      <div
+        class="management-card"
+        routerLink="/admin/product-details">
+
+        <div class="management-icon">
+          📋
+        </div>
+
+        <h3>
+          Product Details
+        </h3>
+
+        <p>
+          إدارة تفاصيل المنتجات
+        </p>
+
+      </div>
+
+
+      <!-- Contact Information -->
+
+      <div
+        class="management-card"
+        routerLink="/admin/contact-information">
+
+        <div class="management-icon">
+          ✉️
+        </div>
+
+        <h3>
+          Contact Information
+        </h3>
+
+        <p>
+          إدارة رسائل التواصل
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- RECENT DATA -->
+  <!-- ========================= -->
+
+  <div class="recent-grid">
+
+
+    <!-- ========================= -->
+    <!-- RECENT ORDERS -->
+    <!-- ========================= -->
+
+    <div class="recent-section">
+
+      <div class="section-title">
+
+        <h2>Recent Orders</h2>
+
+      </div>
+
+
+      <div
+        *ngIf="dashboard.recentOrders.length === 0"
+        class="empty">
+
+        No recent orders
+
+      </div>
+
+
+      <div
+        *ngFor="let order of dashboard.recentOrders"
+        class="recent-card">
+
+        <div class="recent-card-header">
+
+          <h3>
+            Order #{{ order.code }}
+          </h3>
+
+        </div>
+
+        <div class="recent-info">
+
+          <div>
+            <span>Total Price</span>
+            <strong>
+              {{ order.totalPrice }}
+            </strong>
+          </div>
+
+          <div>
+            <span>Total Number</span>
+            <strong>
+              {{ order.totalNumber }}
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- RECENT PRODUCTS -->
+    <!-- ========================= -->
+
+    <div class="recent-section">
+
+      <div class="section-title">
+
+        <h2>Recent Products</h2>
+
+      </div>
+
+
+      <div
+        *ngIf="dashboard.recentProducts.length === 0"
+        class="empty">
+
+        No recent products
+
+      </div>
+
+
+      <div
+        *ngFor="let product of dashboard.recentProducts"
+        class="recent-card">
+
+        <div class="recent-card-header">
+
+          <h3>
+            {{ product.name }}
+          </h3>
+
+          <span class="price">
+            {{ product.price }}
+          </span>
+
+        </div>
+
+        <p>
+          {{ product.description }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- RECENT CATEGORIES -->
+    <!-- ========================= -->
+
+    <div class="recent-section">
+
+      <div class="section-title">
+
+        <h2>Recent Categories</h2>
+
+      </div>
+
+
+      <div
+        *ngIf="dashboard.recentCategories.length === 0"
+        class="empty">
+
+        No recent categories
+
+      </div>
+
+
+      <div
+        *ngFor="let category of dashboard.recentCategories"
+        class="recent-card category-card">
+
+        <h3>
+          {{ category.name }}
+        </h3>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

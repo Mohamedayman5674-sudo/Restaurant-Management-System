@@ -1,0 +1,386 @@
+<div class="container mt-5">
+
+  <!-- ========================= -->
+  <!-- HEADER -->
+  <!-- ========================= -->
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>User Management</h2>
+
+    <button
+      class="btn btn-success"
+      *ngIf="!showCreateForm && !showUpdateForm"
+      (click)="openCreateForm()">
+
+      + Add User
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- MESSAGES -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="successMessage"
+    class="alert alert-success">
+
+    {{ successMessage }}
+
+  </div>
+
+
+  <div
+    *ngIf="errorMessage"
+    class="alert alert-danger">
+
+    {{ errorMessage }}
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- CREATE FORM -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="showCreateForm"
+    class="card mb-4">
+
+    <div class="card-header">
+
+      Add User
+
+    </div>
+
+
+    <div class="card-body">
+
+      <label>Username</label>
+
+      <input
+        class="form-control mb-3"
+        placeholder="Username"
+        [(ngModel)]="newAccount.username">
+
+
+      <label>Password</label>
+
+      <input
+        type="password"
+        class="form-control mb-3"
+        placeholder="Password"
+        [(ngModel)]="newAccount.password">
+
+
+      <label>Age</label>
+
+      <input
+        type="number"
+        class="form-control mb-3"
+        placeholder="Age"
+        [(ngModel)]="newAccount.accountDetails.age">
+
+
+      <label>Phone Number</label>
+
+      <input
+        class="form-control mb-3"
+        placeholder="Phone Number"
+        [(ngModel)]="newAccount.accountDetails.phoneNumber">
+
+
+      <label>Address</label>
+
+      <input
+        class="form-control mb-3"
+        placeholder="Address"
+        [(ngModel)]="newAccount.accountDetails.address">
+
+
+      <button
+        class="btn btn-primary me-2"
+        (click)="createAccount()">
+
+        Save
+
+      </button>
+
+
+      <button
+        class="btn btn-secondary"
+        (click)="cancelCreate()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- UPDATE FORM -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="showUpdateForm"
+    class="card mb-4">
+
+    <div class="card-header">
+
+      Update User
+
+    </div>
+
+
+    <div class="card-body">
+
+      <label>Username</label>
+
+      <input
+        class="form-control mb-3"
+        [(ngModel)]="updateAccountData.username">
+
+
+      <label>Age</label>
+
+      <input
+        type="number"
+        class="form-control mb-3"
+        [(ngModel)]="updateAccountData.accountDetails.age">
+
+
+      <label>Phone Number</label>
+
+      <input
+        class="form-control mb-3"
+        [(ngModel)]="updateAccountData.accountDetails.phoneNumber">
+
+
+      <label>Address</label>
+
+      <input
+        class="form-control mb-3"
+        [(ngModel)]="updateAccountData.accountDetails.address">
+
+
+      <button
+        class="btn btn-primary me-2"
+        (click)="updateAccount()">
+
+        Update
+
+      </button>
+
+
+      <button
+        class="btn btn-secondary"
+        (click)="cancelUpdate()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- EMPTY -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="accounts.length === 0 && !showCreateForm && !showUpdateForm"
+    class="alert alert-info">
+
+    No users found | لا يوجد مستخدمون
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- TABLE -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="accounts.length > 0"
+    class="table-responsive">
+
+    <table class="table table-bordered table-striped">
+
+      <thead>
+
+      <tr>
+
+        <th>ID</th>
+
+        <th>Username</th>
+
+        <th>Age</th>
+
+        <th>Phone</th>
+
+        <th>Address</th>
+
+        <th>Role</th>
+
+        <th>Actions</th>
+
+      </tr>
+
+      </thead>
+
+
+      <tbody>
+
+      <tr
+        *ngFor="let account of accounts">
+
+        <td>
+          {{ account.id }}
+        </td>
+
+
+        <td>
+          {{ account.username }}
+        </td>
+
+
+        <td>
+          {{ account.accountDetails?.age }}
+        </td>
+
+
+        <td>
+          {{ account.accountDetails?.phoneNumber }}
+        </td>
+
+
+        <td>
+          {{ account.accountDetails?.address }}
+        </td>
+
+
+        <td>
+
+          <span
+            *ngFor="let role of account.roles">
+
+            {{ role.code }}
+
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <button
+            class="btn btn-warning btn-sm me-2"
+            (click)="openUpdateForm(account)">
+
+            Edit
+
+          </button>
+
+
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteAccount(account.id)">
+
+            Delete
+
+          </button>
+
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- PAGINATION -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="totalPages > 1"
+    class="pagination-container">
+
+    <button
+      class="btn btn-outline-primary"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1">
+
+      Previous
+
+    </button>
+
+
+    <button
+      *ngFor="let page of pages"
+      class="btn btn-outline-primary"
+      [class.btn-primary]="currentPage === page"
+      (click)="goToPage(page)">
+
+      {{ page }}
+
+    </button>
+
+
+    <button
+      class="btn btn-outline-primary"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages">
+
+      Next
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- PAGE SIZE -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="accounts.length > 0"
+    class="page-size-container">
+
+    <label>
+      Items per page:
+    </label>
+
+
+    <select
+      [(ngModel)]="pageSize"
+      (change)="changePageSize()">
+
+      <option [ngValue]="5">
+        5
+      </option>
+
+      <option [ngValue]="10">
+        10
+      </option>
+
+      <option [ngValue]="20">
+        20
+      </option>
+
+    </select>
+
+  </div>
+
+</div>

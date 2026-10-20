@@ -1,0 +1,122 @@
+<div class="container mt-5">
+
+  <h2 class="mb-4">My Orders</h2>
+
+  <!-- Messages -->
+  <div *ngIf="messageEn || messageAr" class="alert alert-danger">
+    <div *ngIf="messageEn">{{ messageEn }}</div>
+    <div *ngIf="messageAr">{{ messageAr }}</div>
+  </div>
+
+  <!-- No Orders -->
+  <div *ngIf="orders.length === 0 && !messageEn" class="alert alert-info">
+    <div>No orders found</div>
+    <div>لا توجد طلبات</div>
+  </div>
+
+  <!-- Orders Table -->
+  <div *ngIf="orders.length > 0" class="table-responsive">
+
+    <table class="table table-bordered table-striped">
+
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Code</th>
+        <th>Total Price</th>
+        <th>Total Number</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr *ngFor="let order of orders">
+
+        <td>
+          {{ order.id }}
+        </td>
+
+        <td>
+          {{ order.code }}
+        </td>
+
+        <td>
+          {{ order.totalPrice }}
+        </td>
+
+        <td>
+          {{ order.totalNumber }}
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- Pagination -->
+
+  <div
+    *ngIf="totalPages > 1"
+    class="d-flex justify-content-center align-items-center mt-4">
+
+    <button
+      class="btn btn-secondary me-2"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1">
+
+      Previous
+
+    </button>
+
+
+    <button
+      *ngFor="let page of pages"
+      class="btn me-1"
+      [class.btn-primary]="currentPage === page"
+      [class.btn-outline-primary]="currentPage !== page"
+      (click)="goToPage(page)">
+
+      {{ page }}
+
+    </button>
+
+
+    <button
+      class="btn btn-secondary ms-2"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages">
+
+      Next
+
+    </button>
+
+  </div>
+
+
+  <!-- Page Size -->
+
+  <div
+    *ngIf="orders.length > 0"
+    class="mt-3 text-center">
+
+    <label class="me-2">
+      Items per page:
+    </label>
+
+    <select
+      [(ngModel)]="pageSize"
+      (change)="changePageSize()">
+
+      <option [ngValue]="5">5</option>
+      <option [ngValue]="10">10</option>
+      <option [ngValue]="20">20</option>
+
+    </select>
+
+  </div>
+
+</div>

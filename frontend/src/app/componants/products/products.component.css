@@ -1,0 +1,116 @@
+/* Product Image */
+
+img{
+  border-radius: 10px;
+}
+
+/* Pagination */
+
+.pagination .page-link{
+  color: #FEA116;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0 3px;
+}
+
+.pagination .page-item.active .page-link{
+  background-color: #FEA116;
+  border-color: #FEA116;
+  color: #fff;
+}
+
+.pagination .page-link:hover{
+  background-color: #FEA116;
+  border-color: #FEA116;
+  color: #fff;
+}
+
+/* Information Box */
+
+.info-section{
+  border-left: 5px solid #0d6efd;
+  background: #f8fbff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.info-header{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.info-header h3{
+  margin: 0;
+  color: #0d6efd;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.info-icon{
+  font-size: 26px;
+  color: #0d6efd;
+  margin-right: 10px;
+}
+
+.message-box{
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.message-box label{
+  font-weight: bold;
+  color: #0d6efd;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.message-box p{
+  margin: 0;
+  color: #444;
+}
+
+/* Page Size */
+
+select.form-select{
+  display: inline-block;
+  width: 120px;
+  margin-left: 10px;
+}
+
+/* Buttons */
+
+.btn-primary{
+  background-color: #FEA116;
+  border-color: #FEA116;
+}
+
+.btn-primary:hover{
+  background-color: #e18d00;
+  border-color: #e18d00;
+}
+
+.btn-secondary{
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+  .pagination{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page-item{
+    margin-bottom: 5px;
+  }
+
+}

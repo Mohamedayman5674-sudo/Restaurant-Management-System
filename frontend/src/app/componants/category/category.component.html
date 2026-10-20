@@ -1,0 +1,29 @@
+<ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+
+  <li class="nav-item" *ngFor="let category of categories">
+
+    <a
+      class="nav-link d-flex align-items-center text-start mx-3 ms-0 pb-3"
+      [routerLink]="category.name === 'ALL' ? ['/products'] : ['/category', category.id]"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: category.name === 'ALL' }">
+
+      <i [class]="category.logo + ' fa-2x text-primary'"></i>
+
+      <div class="ps-3">
+
+        <small class="text-body">
+          {{ category.flag }}
+        </small>
+
+        <h6 class="mt-n1 mb-0">
+          {{ category.name }}
+        </h6>
+
+      </div>
+
+    </a>
+
+  </li>
+
+</ul>

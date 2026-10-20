@@ -1,0 +1,167 @@
+<div class="signup-page">
+
+  <div class="signup-card">
+
+    <!-- Title -->
+    <div class="text-center mb-4">
+      <h2>Sign Up</h2>
+      <p class="signup-subtitle">
+        Create your account
+      </p>
+    </div>
+
+
+    <!-- User Name -->
+    <div class="mb-3">
+      <label class="form-label">User Name</label>
+
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        [(ngModel)]="signupData.username"
+        placeholder="Enter your User Name"
+        #userName
+        required
+      />
+
+    </div>
+
+
+    <!-- Password -->
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        [(ngModel)]="signupData.password"
+        placeholder="Enter your password"
+        #password
+        required
+      />
+
+    </div>
+
+
+    <!-- Confirm Password -->
+    <div class="mb-3">
+      <label class="form-label">Confirm Password</label>
+
+      <input
+        type="password"
+        class="form-control"
+        name="confirmPassword"
+        [(ngModel)]="signupData.confirmPassword"
+        placeholder="Confirm your password"
+        #confirmPassword
+        required
+      />
+
+    </div>
+
+
+    <!-- Age -->
+    <div class="mb-3">
+      <label class="form-label">Age</label>
+
+      <input
+        type="number"
+        class="form-control"
+        name="age"
+        [(ngModel)]="signupData.age"
+        placeholder="Enter your age"
+        #age
+        required
+      />
+
+    </div>
+
+
+    <!-- Phone Number -->
+    <div class="mb-3">
+      <label class="form-label">Phone Number</label>
+
+      <input
+        type="text"
+        class="form-control"
+        name="phoneNumber"
+        [(ngModel)]="signupData.phoneNumber"
+        placeholder="Enter your phone number"
+        #phoneNumber
+        required
+      />
+
+    </div>
+
+
+    <!-- Address -->
+    <div class="mb-3">
+      <label class="form-label">Address</label>
+
+      <input
+        type="text"
+        class="form-control"
+        name="address"
+        [(ngModel)]="signupData.address"
+        placeholder="Enter your address"
+        #address
+        required
+      />
+
+    </div>
+
+
+    <!-- Messages -->
+    <div
+      class="validation-message"
+      *ngIf="messageAr || messageEn">
+
+      <p
+        class="message-en"
+        *ngIf="messageEn">
+        {{ messageEn }}
+      </p>
+
+      <p
+        class="message-ar"
+        *ngIf="messageAr">
+        {{ messageAr }}
+      </p>
+
+    </div>
+
+
+    <!-- Sign Up Button -->
+    <button
+      type="button"
+      class="signup-btn"
+      (click)="createAccount(
+        userName.value,
+        password.value,
+        confirmPassword.value,
+        age.valueAsNumber,
+        phoneNumber.value,
+        address.value
+      )">
+
+      Sign Up
+
+    </button>
+
+
+    <!-- Login Link -->
+    <div class="login-link">
+
+      <span>Already have an account? </span>
+
+      <a routerLink="/login">
+        Login
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

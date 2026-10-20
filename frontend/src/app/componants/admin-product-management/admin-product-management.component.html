@@ -1,0 +1,615 @@
+<div class="container mt-5">
+
+  <!-- ========================= -->
+  <!-- Header -->
+  <!-- ========================= -->
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2 class="page-title">
+      Product Management
+    </h2>
+
+    <button
+      class="btn btn-success add-product-btn"
+      *ngIf="!showCreateForm && !showUpdateForm"
+      (click)="openCreateForm()">
+
+      + Add Product
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Messages -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="messageEn || messageAr"
+    class="alert alert-info message-box">
+
+    <div *ngIf="messageEn">
+      {{ messageEn }}
+    </div>
+
+    <div *ngIf="messageAr">
+      {{ messageAr }}
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Create Product -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="showCreateForm"
+    class="card form-card mb-4">
+
+    <div class="card-header form-header">
+
+      <h4 class="mb-0">
+        Add Product
+      </h4>
+
+    </div>
+
+    <div class="card-body">
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Name
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="newProduct.name"
+          placeholder="Product name">
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Description
+        </label>
+
+        <textarea
+          class="form-control"
+          [(ngModel)]="newProduct.description"
+          placeholder="Product description"
+          rows="3">
+        </textarea>
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Price
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="newProduct.price"
+          placeholder="Product price">
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Image Path
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="newProduct.imagePath"
+          placeholder="Image path">
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Category
+        </label>
+
+        <select
+          class="form-select"
+          [(ngModel)]="newProduct.categoryId">
+
+          <option [ngValue]="null">
+            Select Category
+          </option>
+
+          <option
+            *ngFor="let category of categories"
+            [ngValue]="category.id">
+
+            {{ category.name }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-primary me-2"
+        (click)="createProduct()">
+
+        Add Product
+
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancelCreate()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Update Product -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="showUpdateForm"
+    class="card form-card mb-4">
+
+    <div class="card-header form-header">
+
+      <h4 class="mb-0">
+        Edit Product
+      </h4>
+
+    </div>
+
+    <div class="card-body">
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Name
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="updateProductData.name"
+          placeholder="Product name">
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Description
+        </label>
+
+        <textarea
+          class="form-control"
+          [(ngModel)]="updateProductData.description"
+          placeholder="Product description"
+          rows="3">
+        </textarea>
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Price
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="updateProductData.price"
+          placeholder="Product price">
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Image Path
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="updateProductData.imagePath"
+          placeholder="Image path">
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Category
+        </label>
+
+        <select
+          class="form-select"
+          [(ngModel)]="updateProductData.categoryId">
+
+          <option [ngValue]="null">
+            Select Category
+          </option>
+
+          <option
+            *ngFor="let category of categories"
+            [ngValue]="category.id">
+
+            {{ category.name }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-primary me-2"
+        (click)="updateProduct()">
+
+        Update Product
+
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancelUpdate()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Search / Filter -->
+  <!-- ========================= -->
+
+  <div class="search-container">
+
+    <h2>
+      Search / Filter
+    </h2>
+
+    <div class="search-row">
+
+      <div>
+
+        <label>
+          Created From
+        </label>
+
+        <input
+          type="datetime-local"
+          [(ngModel)]="createdFrom">
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Created To
+        </label>
+
+        <input
+          type="datetime-local"
+          [(ngModel)]="createdTo">
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Updated From
+        </label>
+
+        <input
+          type="datetime-local"
+          [(ngModel)]="updatedFrom">
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Updated To
+        </label>
+
+        <input
+          type="datetime-local"
+          [(ngModel)]="updatedTo">
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Created By
+        </label>
+
+        <input
+          type="text"
+          placeholder="Created By"
+          [(ngModel)]="createdBy">
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Updated By
+        </label>
+
+        <input
+          type="text"
+          placeholder="Updated By"
+          [(ngModel)]="updatedBy">
+
+      </div>
+
+    </div>
+
+
+    <div class="search-buttons">
+
+      <button
+        type="button"
+        (click)="searchProducts()">
+
+        Search
+
+      </button>
+
+
+      <button
+        type="button"
+        class="clear-button"
+        (click)="clearSearch()">
+
+        Clear
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Empty Products -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="products.length === 0 && !messageEn"
+    class="alert alert-info">
+
+    <div>
+      No products found
+    </div>
+
+    <div>
+      لا توجد منتجات
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Products Table -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="products.length > 0"
+    class="table-responsive product-table-container">
+
+    <table
+      class="table table-bordered table-striped product-table">
+
+      <thead>
+
+      <tr>
+
+        <th>
+          ID
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Price
+        </th>
+
+        <th>
+          Image
+        </th>
+
+        <th class="text-center">
+          Actions
+        </th>
+
+      </tr>
+
+      </thead>
+
+      <tbody>
+
+      <tr
+        *ngFor="let product of products">
+
+        <td>
+          {{ product.id }}
+        </td>
+
+        <td class="product-name">
+          {{ product.name }}
+        </td>
+
+        <td>
+          {{ product.description }}
+        </td>
+
+        <td class="product-price">
+          {{ product.price }}
+        </td>
+
+        <td>
+
+          <img
+            *ngIf="product.imagePath"
+            [src]="'/assets/img/' + product.imagePath"
+            width="80"
+            height="60"
+            class="product-image">
+
+        </td>
+
+        <td class="text-center actions-cell">
+
+          <button
+            type="button"
+            class="action-btn edit-btn"
+            (click)="openUpdateForm(product)">
+
+            <span class="action-icon">
+              ✏️
+            </span>
+
+            Edit
+
+          </button>
+
+          <button
+            type="button"
+            class="action-btn delete-btn"
+            (click)="deleteProduct(product.id)">
+
+            <span class="action-icon">
+              🗑️
+            </span>
+
+            Delete
+
+          </button>
+
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Pagination -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="totalPages > 1"
+    class="pagination-container">
+
+    <button
+      class="pagination-btn"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1">
+
+      Previous
+
+    </button>
+
+    <button
+      *ngFor="let page of pages"
+      class="pagination-number"
+      [class.active-page]="currentPage === page"
+      (click)="goToPage(page)">
+
+      {{ page }}
+
+    </button>
+
+    <button
+      class="pagination-btn"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages">
+
+      Next
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Page Size -->
+  <!-- ========================= -->
+
+  <div
+    *ngIf="products.length > 0"
+    class="page-size-container">
+
+    <label>
+      Items per page:
+    </label>
+
+    <select
+      [(ngModel)]="pageSize"
+      (change)="changePageSize()">
+
+      <option [ngValue]="5">
+        5
+      </option>
+
+      <option [ngValue]="10">
+        10
+      </option>
+
+      <option [ngValue]="20">
+        20
+      </option>
+
+    </select>
+
+  </div>
+
+</div>

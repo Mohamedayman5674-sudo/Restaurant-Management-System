@@ -1,0 +1,374 @@
+<div class="admin-category-container">
+
+  <h1>Category Management</h1>
+
+
+  <!-- Success Message -->
+
+  <div
+    *ngIf="successMessage"
+    class="success-message">
+
+    {{ successMessage }}
+
+  </div>
+
+
+  <!-- Error Message -->
+
+  <div
+    *ngIf="errorMessage"
+    class="error-message">
+
+    {{ errorMessage }}
+
+  </div>
+
+
+  <!-- Create / Edit -->
+
+  <div class="form-container">
+
+    <h2>
+      {{ isEditMode ? 'Edit Category' : 'Create Category' }}
+    </h2>
+
+
+    <div class="form-row">
+
+      <input
+        type="text"
+        placeholder="Category Name"
+        [(ngModel)]="formCategory.name"
+      />
+
+
+      <input
+        type="text"
+        placeholder="Logo"
+        [(ngModel)]="formCategory.logo"
+      />
+
+
+      <input
+        type="text"
+        placeholder="Flag"
+        [(ngModel)]="formCategory.flag"
+      />
+
+    </div>
+
+
+    <div class="form-buttons">
+
+      <button
+        type="button"
+        (click)="saveCategory()">
+
+        {{ isEditMode ? 'Update Category' : 'Create Category' }}
+
+      </button>
+
+
+      <button
+        type="button"
+        class="cancel-button"
+        *ngIf="isEditMode"
+        (click)="resetForm()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Search -->
+
+  <div class="search-container">
+
+    <h2>Search / Filter</h2>
+
+
+    <div class="search-row">
+
+      <div>
+
+        <label>Created From</label>
+
+        <input
+          type="datetime-local"
+          [(ngModel)]="createdFrom"
+        />
+
+      </div>
+
+
+      <div>
+
+        <label>Created To</label>
+
+        <input
+          type="datetime-local"
+          [(ngModel)]="createdTo"
+        />
+
+      </div>
+
+
+      <div>
+
+        <label>Updated From</label>
+
+        <input
+          type="datetime-local"
+          [(ngModel)]="updatedFrom"
+        />
+
+      </div>
+
+
+      <div>
+
+        <label>Updated To</label>
+
+        <input
+          type="datetime-local"
+          [(ngModel)]="updatedTo"
+        />
+
+      </div>
+
+
+      <div>
+
+        <label>Created By</label>
+
+        <input
+          type="text"
+          placeholder="Created By"
+          [(ngModel)]="createdBy"
+        />
+
+      </div>
+
+
+      <div>
+
+        <label>Updated By</label>
+
+        <input
+          type="text"
+          placeholder="Updated By"
+          [(ngModel)]="updatedBy"
+        />
+
+      </div>
+
+    </div>
+
+
+    <div class="search-buttons">
+
+      <button
+        type="button"
+        (click)="searchCategories()">
+
+        Search
+
+      </button>
+
+
+      <button
+        type="button"
+        class="clear-button"
+        (click)="clearSearch()">
+
+        Clear
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Categories -->
+
+  <div class="table-container">
+
+    <h2>Categories</h2>
+
+
+    <div
+      *ngIf="categories.length === 0"
+      class="empty">
+
+      No categories found
+
+    </div>
+
+
+    <table
+      *ngIf="categories.length > 0">
+
+      <thead>
+
+      <tr>
+
+        <th>ID</th>
+
+        <th>Name</th>
+
+        <th>Logo</th>
+
+        <th>Flag</th>
+
+        <th>Actions</th>
+
+      </tr>
+
+      </thead>
+
+
+      <tbody>
+
+      <tr
+        *ngFor="let category of categories">
+
+        <td>
+          {{ category.id }}
+        </td>
+
+
+        <td>
+          {{ category.name }}
+        </td>
+
+
+        <td>
+          {{ category.logo }}
+        </td>
+
+
+        <td>
+          {{ category.flag }}
+        </td>
+
+
+        <td>
+
+          <button
+            class="edit-button"
+            type="button"
+            (click)="openEditForm(category)">
+
+            Edit
+
+          </button>
+
+
+          <button
+            class="delete-button"
+            type="button"
+            (click)="confirmDelete(category.id!)">
+
+            Delete
+
+          </button>
+
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- Pagination -->
+
+  <div
+    class="pagination"
+    *ngIf="totalPages > 1">
+
+    <button
+      type="button"
+      (click)="changePage(currentPage - 1)"
+      [disabled]="currentPage === 1">
+
+      Previous
+
+    </button>
+
+
+    <button
+      type="button"
+      *ngFor="let page of pages"
+      (click)="changePage(page)"
+      [class.active]="page === currentPage">
+
+      {{ page }}
+
+    </button>
+
+
+    <button
+      type="button"
+      (click)="changePage(currentPage + 1)"
+      [disabled]="currentPage === totalPages">
+
+      Next
+
+    </button>
+
+  </div>
+
+
+  <!-- Delete Confirmation -->
+
+  <div
+    class="confirmation-overlay"
+    *ngIf="showDeleteConfirmation">
+
+    <div class="confirmation-box">
+
+      <h2>Delete Category</h2>
+
+      <p>
+        Are you sure you want to delete this category?
+      </p>
+
+
+      <div class="confirmation-buttons">
+
+        <button
+          class="delete-button"
+          type="button"
+          (click)="deleteCategory()">
+
+          Yes, Delete
+
+        </button>
+
+
+        <button
+          class="cancel-button"
+          type="button"
+          (click)="cancelDelete()">
+
+          Cancel
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

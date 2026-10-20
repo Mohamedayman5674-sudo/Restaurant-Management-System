@@ -1,0 +1,21 @@
+<a
+  class="nav-item nav-link cart-link"
+  routerLink="/cardDetails">
+
+  <div class="cart-info">
+
+    <span class="cart-price">
+      ${{ totalPrice | number:'1.2-2' }}
+    </span>
+
+    <i class="fas fa-coins"></i>
+
+    <span class="cart-number">
+      {{ totalNumber }}
+    </span>
+
+    <i class="fas fa-cart-arrow-down"></i>
+
+  </div>
+
+</a>

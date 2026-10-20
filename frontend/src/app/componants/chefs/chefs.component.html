@@ -1,0 +1,125 @@
+<div class="container-xxl position-relative p-0">
+
+  <div class="container-xxl py-5 bg-dark hero-header mb-5">
+    <div class="container text-center my-5 pt-5 pb-4">
+      <h1 class="display-3 text-white mb-3 animated slideInDown">
+        Our Team
+      </h1>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Team Start -->
+<div class="container-xxl pt-5 pb-3">
+
+  <div class="container">
+
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+
+      <h5 class="section-title ff-secondary text-center text-primary fw-normal">
+        Team Members
+      </h5>
+
+      <h1 class="mb-5">
+        Our Master Chefs
+      </h1>
+
+    </div>
+
+
+    <!-- Messages -->
+    <div
+      *ngIf="messageEn || messageAr"
+      class="alert alert-info text-center">
+
+      <div *ngIf="messageEn">
+        {{ messageEn }}
+      </div>
+
+      <div *ngIf="messageAr">
+        {{ messageAr }}
+      </div>
+
+    </div>
+
+
+    <!-- Chefs -->
+    <div class="row g-4">
+
+      <div
+        class="col-lg-3 col-md-6 wow fadeInUp"
+        *ngFor="let chef of chefs">
+
+        <div class="team-item text-center rounded overflow-hidden">
+
+          <!-- Chef Image -->
+          <div class="rounded-circle overflow-hidden m-4">
+
+            <img
+              class="img-fluid"
+              [src]="'assets/img/' + chef.logoPath"
+              [alt]="chef.name">
+
+          </div>
+
+
+          <!-- Chef Name -->
+          <h5 class="mb-0">
+            {{ chef.name }}
+          </h5>
+
+
+          <!-- Chef Specialization -->
+          <small>
+            {{ chef.spec }}
+          </small>
+
+
+          <!-- Social Links -->
+          <div class="d-flex justify-content-center mt-3">
+
+            <a
+              class="btn btn-square btn-primary mx-1"
+              [href]="chef.faceLink"
+              target="_blank"
+              *ngIf="chef.faceLink">
+
+              <i class="fab fa-facebook-f"></i>
+
+            </a>
+
+
+            <a
+              class="btn btn-square btn-primary mx-1"
+              [href]="chef.tweLink"
+              target="_blank"
+              *ngIf="chef.tweLink">
+
+              <i class="fab fa-twitter"></i>
+
+            </a>
+
+
+            <a
+              class="btn btn-square btn-primary mx-1"
+              [href]="chef.instaLink"
+              target="_blank"
+              *ngIf="chef.instaLink">
+
+              <i class="fab fa-instagram"></i>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,286 @@
+<div class="container mt-5">
+
+  <!-- Header -->
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>Chef Management</h2>
+
+    <button
+      class="btn btn-success"
+      *ngIf="!showCreateForm && !showUpdateForm"
+      (click)="openCreateForm()">
+
+      + Add Chef
+
+    </button>
+
+  </div>
+
+
+  <!-- Messages -->
+
+  <div
+    *ngIf="successMessage"
+    class="alert alert-success">
+
+    {{ successMessage }}
+
+  </div>
+
+  <div
+    *ngIf="errorMessage"
+    class="alert alert-danger">
+
+    {{ errorMessage }}
+
+  </div>
+
+
+  <!-- CREATE FORM -->
+
+  <div
+    *ngIf="showCreateForm"
+    class="card mb-4">
+
+    <div class="card-header">
+      Add Chef
+    </div>
+
+    <div class="card-body">
+
+      <input
+        class="form-control mb-2"
+        placeholder="Name"
+        [(ngModel)]="newChef.name">
+
+      <input
+        class="form-control mb-2"
+        placeholder="Specialization"
+        [(ngModel)]="newChef.spec">
+
+      <input
+        class="form-control mb-2"
+        placeholder="Image Name (team-1.jpg)"
+        [(ngModel)]="newChef.logoPath">
+
+      <input
+        class="form-control mb-2"
+        placeholder="Facebook Link"
+        [(ngModel)]="newChef.faceLink">
+
+      <input
+        class="form-control mb-2"
+        placeholder="Twitter Link"
+        [(ngModel)]="newChef.tweLink">
+
+      <input
+        class="form-control mb-3"
+        placeholder="Instagram Link"
+        [(ngModel)]="newChef.instaLink">
+
+      <button
+        class="btn btn-primary me-2"
+        (click)="createChef()">
+
+        Save
+
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        (click)="cancelCreate()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- UPDATE FORM -->
+
+  <div
+    *ngIf="showUpdateForm"
+    class="card mb-4">
+
+    <div class="card-header">
+      Update Chef
+    </div>
+
+    <div class="card-body">
+
+      <input
+        class="form-control mb-2"
+        [(ngModel)]="updateChefData.name">
+
+      <input
+        class="form-control mb-2"
+        [(ngModel)]="updateChefData.spec">
+
+      <input
+        class="form-control mb-2"
+        [(ngModel)]="updateChefData.logoPath">
+
+      <input
+        class="form-control mb-2"
+        [(ngModel)]="updateChefData.faceLink">
+
+      <input
+        class="form-control mb-2"
+        [(ngModel)]="updateChefData.tweLink">
+
+      <input
+        class="form-control mb-3"
+        [(ngModel)]="updateChefData.instaLink">
+
+      <button
+        class="btn btn-primary me-2"
+        (click)="updateChef()">
+
+        Update
+
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        (click)="cancelUpdate()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- TABLE -->
+
+  <div
+    *ngIf="chefs.length > 0"
+    class="table-responsive">
+
+    <table class="table table-bordered table-striped">
+
+      <thead>
+
+      <tr>
+
+        <th>ID</th>
+
+        <th>Image</th>
+
+        <th>Name</th>
+
+        <th>Specialization</th>
+
+        <th>Actions</th>
+
+      </tr>
+
+      </thead>
+
+      <tbody>
+
+      <tr *ngFor="let chef of chefs">
+
+        <td>
+          {{ chef.id }}
+        </td>
+
+        <td>
+
+          <img
+            [src]="'/assets/img/' + chef.logoPath"
+            width="70"
+            height="70"
+            style="border-radius:50%; object-fit:cover;">
+
+        </td>
+
+        <td>
+          {{ chef.name }}
+        </td>
+
+        <td>
+          {{ chef.spec }}
+        </td>
+
+        <td>
+
+          <button
+            class="btn btn-warning btn-sm me-2"
+            (click)="openUpdateForm(chef)">
+
+            Edit
+
+          </button>
+
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteChef(chef.id)">
+
+            Delete
+
+          </button>
+
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- EMPTY -->
+
+  <div
+    *ngIf="chefs.length === 0"
+    class="alert alert-info">
+
+    No chefs found
+
+  </div>
+
+
+  <!-- PAGINATION -->
+
+  <div
+    *ngIf="totalPages > 1"
+    class="d-flex justify-content-center mt-4">
+
+    <button
+      class="btn btn-outline-primary me-2"
+      (click)="previousPage()">
+
+      Previous
+
+    </button>
+
+    <button
+      *ngFor="let page of pages"
+      class="btn btn-outline-primary me-2"
+      [class.btn-primary]="currentPage === page"
+      (click)="goToPage(page)">
+
+      {{ page }}
+
+    </button>
+
+    <button
+      class="btn btn-outline-primary"
+      (click)="nextPage()">
+
+      Next
+
+    </button>
+
+  </div>
+
+</div>
